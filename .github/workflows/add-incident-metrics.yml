@@ -1,0 +1,31 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Add comment
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-comment:
+    if: github.event.label.name == 'incident'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add comment
+        uses: peter-evans/create-or-update-comment@a35cf36e5301d70b76f316e867e7788a55a31dae
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ${{ github.event.issue.user.login }} update the `incident` metrics below.
+            | Metric  | Value |
+            | ------------- | ------------- |
+            | When was the bug introduced (when did the incident begin to impact users)? | _YYYY-MM-DD_  |
+            | When was the bug reported in GitHub? | _YYYY-MM-DD_  |
+            | When was the incident mitigated for users? | _YYYY-MM-DD_  |
+
+            - [ ] Incident was reported by an end-user.
+            - [ ] Check for system regressions.
