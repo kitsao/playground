@@ -20,7 +20,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            ${{ github.event.issue.user.login }} update the `incident` metrics below.
+            @${{ github.event.issue.user.login }} update the `incident` metrics below.
             | Metric  | Value |
             | ------------- | ------------- |
             | When was the bug introduced (when did the incident begin to impact users)? | _YYYY-MM-DD_  |
